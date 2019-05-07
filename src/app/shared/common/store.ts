@@ -1,19 +1,19 @@
-import { getApolloClient } from '../../graphql/client/apollo-client';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { reducer as accounts } from '@accounts/client';
-import { persistStore, autoRehydrate } from 'redux-persist';
-import * as immutableTransform from 'redux-persist-transform-immutable';
+import {getApolloClient} from '../../graphql/client/apollo-client';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {persistStore} from 'redux-persist';
+import {persistCombineReducers} from 'redux-persist/es/persistCombineReducers';
+import storage from 'redux-persist/es/storage';
+
 
 const apolloClient = getApolloClient();
 
 export const store = createStore(
-  combineReducers({
-    apollo: apolloClient.reducer(),
-    accounts
+  persistCombineReducers({key: 'primary', storage},
+    {
+    apollo: apolloClient.reducer()
   }),
   compose(
-    applyMiddleware(apolloClient.middleware()),
-    autoRehydrate(),
+    applyMiddleware(apolloClient.middleware())
   ),
 );
 
@@ -21,10 +21,7 @@ let persistor;
 
 export const reduxPersist = () => new Promise((resolve) => {
   persistor = persistStore(
-    store,
-    {
-      transforms: [immutableTransform({ whitelist: ['accounts'] })]
-    },
+    store, {},
     () => resolve()
   );
 });

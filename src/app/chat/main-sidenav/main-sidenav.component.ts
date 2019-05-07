@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { MenuController } from 'ionic-angular';
+import { Observable } from 'rxjs';
+
 
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { UserFields } from '../../graphql/types/types';
 import { ChannelsService } from '../chat-view/channels.service';
+import {MenuController} from '@ionic/angular';
+import 'rxjs/operator/filter';
+import 'rxjs/operator/filter';
+import {from} from 'rxjs/internal/observable/from';
+import {filter, map} from 'rxjs/internal/operators/';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-main-sidenav',
@@ -34,10 +37,14 @@ export class MainSidenavComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authenticationService.getUser();
 
-    this.directChannels = this.myChannelService.getMyChannels()
-      .filter(result => !!result.data && !!result.data.channelsByUser)
-      .map(result => result.data.channelsByUser.filter(channel => channel.direct))
-      .do(channels => this.directChannelsNum = channels.length);
+    // @ts-ignore
+    this.directChannels = from(this.myChannelService.getMyChannels()).pipe(
+      filter(result => !!result.data && !!result.data.channelsByUser),
+      map(result => result.data.channelsByUser.filter(channel => channel.direct)),
+      do(channels => this.directChannelsNum = channels.length)
+    )
+
+
 
     this.channels = this.myChannelService.getMyChannels()
       .filter(result => !!result.data && !!result.data.channelsByUser)

@@ -1,9 +1,10 @@
-import { GraphQLClient } from '@accounts/graphql-client';
-import { AccountsClient } from '@accounts/client';
-
 import { userFieldsFragment } from '../../graphql/queries/user.fragment';
 import { getApolloClient } from '../../graphql/client/apollo-client';
-import { store } from '../common/store';
+
+import GraphQLClient from '@accounts/graphql-client';
+import {AccountsClient} from '@accounts/client';
+import {TokenStorage} from '@accounts/client/lib/types';
+
 
 const client = getApolloClient();
 const graphQLInterface = new GraphQLClient({
@@ -11,15 +12,12 @@ const graphQLInterface = new GraphQLClient({
   userFieldsFragment,
 });
 
+// @ts-ignore
+const storage: TokenStorage = localStorage;
+
+
 const accountsClient = new AccountsClient({
-  tokenStorage: localStorage,
-  reduxStoreKey: 'accounts',
-  store,
-  onSignedOutHook: () => null,
-  onEnrollAccountHook: () => null,
-  onResetPasswordHook: () => null,
-  onVerifyEmailHook: () => null,
-  onSignedInHook: () => null,
+  tokenStorage: storage,
 }, graphQLInterface);
 
 export function getAccountsClient() {

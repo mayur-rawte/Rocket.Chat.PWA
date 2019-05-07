@@ -1,7 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-
+import {  Subscription } from 'rxjs';
+import { fromEvent } from 'rxjs';
 @Injectable()
 export class ScrollerService {
   mount(elementRef: ElementRef): Scrolled {
@@ -66,7 +65,7 @@ export class Scrolled {
     const pagePixelLenForLoadMore = Math.min(currentPageHeight * this.PAGE_PERCENT_LOAD_MORE_TRIGGER , this.MAX_PAGE_LOAD_MORE_PIXEL_LEN);
 
     if (!this.scrollSub) {
-      this.scrollSub = Observable.fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(() => {
+      this.scrollSub = fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(() => {
         this.onChange(pagePixelLenForLoadMore);
       });
     }

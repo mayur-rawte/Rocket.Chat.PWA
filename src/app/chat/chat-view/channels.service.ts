@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Apollo, ApolloQueryObservable } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {Apollo, QueryRef} from 'apollo-angular';
 
-import { ChannelByName, DirectChannel, MyChannels } from '../../graphql/types/types';
-import { AuthenticationService } from '../../shared/services/authentication.service';
-import { myChannelsQuery } from '../../graphql/queries/my-channels.query';
-import { channelByNameQuery } from '../../graphql/queries/channel-by-name.query';
-import { directChannelQuery } from '../../graphql/queries/direct-channel.query';
+import {ChannelByName, DirectChannel, MyChannels} from '../../graphql/types/types';
+import {AuthenticationService} from '../../shared/services/authentication.service';
+import {myChannelsQuery} from '../../graphql/queries/my-channels.query';
+import {channelByNameQuery} from '../../graphql/queries/channel-by-name.query';
+import {directChannelQuery} from '../../graphql/queries/direct-channel.query';
+import {Observable} from 'rxjs/internal/Observable';
+import {ObservableInput} from 'rxjs/internal/types';
+
 
 @Injectable()
 export class ChannelsService {
@@ -14,7 +17,7 @@ export class ChannelsService {
               private authenticationService: AuthenticationService) {
   }
 
-  getMyChannels() {
+  getMyChannels(): QueryRef<any> {
     const user: any = this.authenticationService.getUser() || {};
     const variables: MyChannels.Variables = {
       userId: user.id
@@ -27,18 +30,18 @@ export class ChannelsService {
     });
   }
 
-  getChannelByName(channelName: string): ApolloQueryObservable<ChannelByName.Query> {
+  getChannelByName(channelName: string): QueryRef<ChannelByName.Query> {
     return this.apollo.watchQuery<ChannelByName.Query>({
       query: channelByNameQuery,
-      variables: { name: channelName },
+      variables: {name: channelName},
       fetchPolicy: 'cache-and-network',
     });
   }
 
-  getDirectChannelByUsername(username: string): ApolloQueryObservable<DirectChannel.Query> {
+  getDirectChannelByUsername(username: string): QueryRef<DirectChannel.Query> {
     return this.apollo.watchQuery<DirectChannel.Query>({
       query: directChannelQuery,
-      variables: { username },
+      variables: {username},
       fetchPolicy: 'cache-and-network',
     });
 

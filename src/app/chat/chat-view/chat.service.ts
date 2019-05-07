@@ -1,9 +1,9 @@
-import 'rxjs/add/operator/do';
+
 
 import { Injectable } from '@angular/core';
-import { Apollo, ApolloQueryObservable } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
-import { Observable } from 'rxjs/Observable';
+import {Apollo} from 'apollo-angular';
+import {ApolloQueryResult, ObservableQuery} from 'apollo-client';
+import { Observable } from 'rxjs';
 
 import { sendMessageMutation } from '../../graphql/queries/send-message.mutation';
 import { messagesQuery } from '../../graphql/queries/messages.query';
@@ -16,7 +16,7 @@ export class ChatService {
   private cursor: any;
   private noMoreToLoad = false;
   private loadingMoreMessages = false;
-  private messagesQueryObservable: ApolloQueryObservable<Messages.Query>;
+  private messagesQueryObservable: ObservableQuery<Messages.Query>;
   private messagesSubscriptionObservable;
   private user: UserFields.Fragment;
 

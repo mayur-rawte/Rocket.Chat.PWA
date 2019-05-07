@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { ToastController } from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { AuthenticationService } from '../../services/authentication.service';
-import { environment } from '../../../../environments/environment';
-import { OauthProvider } from '../../../graphql/types/types';
+
+import {AuthenticationService} from '../../services/authentication.service';
+import {environment} from '../../../../environments/environment';
+import {OauthProvider} from '../../../graphql/types/types';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   moduleId: module.id,
@@ -94,8 +95,8 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  showToast(message: string, duration: number = 5000) {
-    const toast = this.toastCtrl.create({
+  async showToast(message: string, duration: number = 5000) {
+    const toast = await this.toastCtrl.create({
       message,
       duration,
       showCloseButton: true,

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
-import { MenuController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { PushNotificationsService } from '../../shared/services/push-notifications.service';
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-chat',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { getAccountsClient } from './accounts-client';
 import { AuthorizationMiddleware } from './authorization-middleware';
@@ -8,6 +8,7 @@ import { UserFields, GetAllProviders, OauthProvider } from '../../graphql/types/
 import { getAllProvidersQuery } from '../../graphql/queries/get-all-providers.query';
 import { getPersistor } from '../common/store';
 import { getApolloClient } from '../../graphql/client/apollo-client';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
@@ -85,8 +86,8 @@ export class AuthenticationService {
   availableProviders(): Observable<OauthProvider[]> {
     return this.apollo.query<GetAllProviders.Query>({
       query: getAllProvidersQuery
-    }).
-      map(res => res.data.oauthProviders);
+    })
+      .pipe(      map(res => res.data.oauthProviders))
   }
 
 
