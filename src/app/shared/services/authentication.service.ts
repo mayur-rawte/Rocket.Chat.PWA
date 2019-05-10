@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {Observable} from 'rxjs/Observable';
 
-import { getAccountsClient } from './accounts-client';
-import { AuthorizationMiddleware } from './authorization-middleware';
-import { UserFields, GetAllProviders, OauthProvider } from '../../graphql/types/types';
-import { getAllProvidersQuery } from '../../graphql/queries/get-all-providers.query';
-import { getPersistor } from '../common/store';
-import { getApolloClient } from '../../graphql/client/apollo-client';
+import {getAccountsClient} from './accounts-client';
+import {AuthorizationMiddleware} from './authorization-middleware';
+import {UserFields, GetAllProviders, OauthProvider} from '../../graphql/types/types';
+import {getAllProvidersQuery} from '../../graphql/queries/get-all-providers.query';
+import {getPersistor} from '../common/store';
+import {getApolloClient} from '../../graphql/client/apollo-client';
 
 @Injectable()
 export class AuthenticationService {
@@ -50,7 +50,7 @@ export class AuthenticationService {
   async refreshWithNewTokens(accessToken, refreshToken): Promise<Boolean> {
     try {
       this.cleanCache();
-      await this.accountsClient.storeTokens({ accessToken, refreshToken });
+      await this.accountsClient.storeTokens({accessToken, refreshToken});
       await this.accountsClient.loadTokensFromStorage();
       await this.accountsClient.refreshSession();
       await this.setAuthMiddlewareToken();
@@ -71,7 +71,7 @@ export class AuthenticationService {
 
   async login(username: string, password: string): Promise<void> {
     this.cleanCache();
-    await this.accountsClient.loginWithPassword({ username }, password);
+    await this.accountsClient.loginWithPassword( username, password);
     await this.setAuthMiddlewareToken();
     return;
   }
@@ -85,8 +85,7 @@ export class AuthenticationService {
   availableProviders(): Observable<OauthProvider[]> {
     return this.apollo.query<GetAllProviders.Query>({
       query: getAllProvidersQuery
-    }).
-      map(res => res.data.oauthProviders);
+    }).map(res => res.data.oauthProviders);
   }
 
 

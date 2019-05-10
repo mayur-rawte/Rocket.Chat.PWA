@@ -1,245 +1,245 @@
 /* tslint:disable */
 
 export interface Query {
-  channels: Channel[] | null; 
-  channelByName: Channel | null; 
-  directChannel: Channel | null; 
-  channelsByUser: Channel[] | null; 
-  messages: MessagesWithCursor | null; 
-  oauthProviders: OauthProvider[] | null; 
-  me: User | null; 
+  channels: Channel[] | null;
+  channelByName: Channel | null;
+  directChannel: Channel | null;
+  channelsByUser: Channel[] | null;
+  messages: MessagesWithCursor | null;
+  oauthProviders: OauthProvider[] | null;
+  me: User | null;
 }
 
 export interface Channel {
-  id: string; 
-  name: string | null; 
-  description: string | null; 
-  announcement: string | null; 
-  topic: string | null; 
-  members: User[] | null; 
-  owners: User[] | null; 
-  numberOfMembers: number | null; 
-  numberOfMessages: number | null; 
-  readOnly: boolean | null; 
-  direct: boolean | null; 
-  privateChannel: boolean | null; 
-  favourite: boolean | null; 
-  unseenMessages: number | null; 
+  id: string;
+  name: string | null;
+  description: string | null;
+  announcement: string | null;
+  topic: string | null;
+  members: User[] | null;
+  owners: User[] | null;
+  numberOfMembers: number | null;
+  numberOfMessages: number | null;
+  readOnly: boolean | null;
+  direct: boolean | null;
+  privateChannel: boolean | null;
+  favourite: boolean | null;
+  unseenMessages: number | null;
 }
 
 export interface User {
-  id: string; 
-  email: string | null; 
-  username: string | null; 
-  status: UserStatus | null; 
-  avatar: string | null; 
-  name: string | null; 
-  lastLogin: string | null; 
-  channels: Channel[] | null; 
-  directMessages: Channel[] | null; 
+  id: string;
+  email: string | null;
+  username: string | null;
+  status: UserStatus | null;
+  avatar: string | null;
+  name: string | null;
+  lastLogin: string | null;
+  channels: Channel[] | null;
+  directMessages: Channel[] | null;
 }
 
 export interface MessagesWithCursor {
-  cursor: string | null; 
-  channel: Channel | null; 
-  messagesArray: Message[] | null; 
+  cursor: string | null;
+  channel: Channel | null;
+  messagesArray: Message[] | null;
 }
 
 export interface Message {
-  id: string | null; 
-  author: User | null; 
-  content: string | null; 
-  channel: Channel | null; 
-  creationTime: number | null; 
-  fromServer: boolean | null; 
-  type: string | null; 
-  userRef: User[] | null; 
-  channelRef: Channel[] | null; 
-  reactions: Reaction[] | null; 
+  id: string | null;
+  author: User | null;
+  content: string | null;
+  channel: Channel | null;
+  creationTime: number | null;
+  fromServer: boolean | null;
+  type: string | null;
+  userRef: User[] | null;
+  channelRef: Channel[] | null;
+  reactions: Reaction[] | null;
 }
 
 export interface Reaction {
-  username: string | null; 
-  icon: string | null; 
+  username: string | null;
+  icon: string | null;
 }
 
 export interface OauthProvider {
-  name: string; 
+  name: string;
 }
 
 export interface Mutation {
-  createChannel: Channel | null; 
-  leaveChannel: boolean | null; 
-  hideChannel: boolean | null; 
-  sendMessage: Message | null; 
-  editMessage: Message | null; 
-  deleteMessage: Message | null; 
-  addReactionToMassage: Message | null; 
-  setStatus: User | null; 
-  loginWithPassword: LoginReturn | null; 
-  refreshTokens: LoginReturn | null; 
-  logout: boolean | null; 
-  impersonate: ImpersonateReturn | null; 
-  createUser: boolean | null; 
-  verifyEmail: boolean | null; 
-  resetPassword: boolean | null; 
-  sendVerificationEmail: boolean | null; 
-  sendResetPasswordEmail: boolean | null; 
+  createChannel: Channel | null;
+  leaveChannel: boolean | null;
+  hideChannel: boolean | null;
+  sendMessage: Message | null;
+  editMessage: Message | null;
+  deleteMessage: Message | null;
+  addReactionToMassage: Message | null;
+  setStatus: User | null;
+  loginWithPassword: LoginReturn | null;
+  refreshTokens: LoginReturn | null;
+  logout: boolean | null;
+  impersonate: ImpersonateReturn | null;
+  createUser: boolean | null;
+  verifyEmail: boolean | null;
+  resetPassword: boolean | null;
+  sendVerificationEmail: boolean | null;
+  sendResetPasswordEmail: boolean | null;
 }
 
 export interface LoginReturn {
-  sessionId: string | null; 
-  user: User | null; 
-  tokens: Tokens | null; 
+  sessionId: string | null;
+  user: User | null;
+  tokens: Tokens | null;
 }
 
 export interface Tokens {
-  refreshToken: string | null; 
-  accessToken: string | null; 
+  refreshToken: string | null;
+  accessToken: string | null;
 }
 
 export interface ImpersonateReturn {
-  authorized: boolean | null; 
-  tokens: Tokens | null; 
-  user: User | null; 
+  authorized: boolean | null;
+  tokens: Tokens | null;
+  user: User | null;
 }
 
 export interface Subscription {
-  chatMessageAdded: Message | null; 
+  chatMessageAdded: Message | null;
 }
 
 export interface PasswordType {
-  digest: string | null; 
-  algorithm: string | null; 
+  digest: string | null;
+  algorithm: string | null;
 }
 
 export interface ChannelFilter {
-  nameFilter: string | null; 
-  privacy: Privacy | null; 
-  joinedChannels: boolean | null; 
-  sortBy: ChannelSort | null; 
+  nameFilter: string | null;
+  privacy: Privacy | null;
+  joinedChannels: boolean | null;
+  sortBy: ChannelSort | null;
 }
 
 export interface MessageIdentifier {
-  channelId: string; 
-  messageId: string; 
+  channelId: string;
+  messageId: string;
 }
 
 export interface UserInput {
-  id: string | null; 
-  email: string | null; 
-  username: string | null; 
+  id: string | null;
+  email: string | null;
+  username: string | null;
 }
 
 export interface CreateUserInput {
-  username: string | null; 
-  email: string | null; 
-  password: string | null; 
-  profile: CreateUserProfileInput | null; 
+  username: string | null;
+  email: string | null;
+  password: string | null;
+  profile: CreateUserProfileInput | null;
 }
 
 export interface CreateUserProfileInput {
-  name: string | null; 
-  firstName: string | null; 
-  lastName: string | null; 
+  name: string | null;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface PasswordInput {
-  digest: string | null; 
-  algorithm: string | null; 
+  digest: string | null;
+  algorithm: string | null;
 }
 
 export interface ChannelNameAndDirect {
-  name: string; 
-  direct: boolean; 
+  name: string;
+  direct: boolean;
 }
 export interface ChannelsQueryArgs {
-  filter: ChannelFilter | null; 
+  filter: ChannelFilter | null;
 }
 export interface ChannelByNameQueryArgs {
-  name: string; 
+  name: string;
 }
 export interface DirectChannelQueryArgs {
-  username: string | null; 
-  channelId: string | null; 
+  username: string | null;
+  channelId: string | null;
 }
 export interface ChannelsByUserQueryArgs {
-  userId: string; 
+  userId: string;
 }
 export interface MessagesQueryArgs {
-  channelId: string | null; 
-  channelName: string | null; 
-  directTo: string | null; 
-  cursor: string | null; 
-  count: number | null; 
-  searchRegex: string | null; 
-  excludeServer: boolean | null; 
+  channelId: string | null;
+  channelName: string | null;
+  directTo: string | null;
+  cursor: string | null;
+  count: number | null;
+  searchRegex: string | null;
+  excludeServer: boolean | null;
 }
 export interface CreateChannelMutationArgs {
-  name: string; 
-  private: boolean | null; 
-  readOnly: boolean | null; 
-  membersId: string[]; 
+  name: string;
+  private: boolean | null;
+  readOnly: boolean | null;
+  membersId: string[];
 }
 export interface LeaveChannelMutationArgs {
-  channelId: string; 
+  channelId: string;
 }
 export interface HideChannelMutationArgs {
-  channelId: string; 
+  channelId: string;
 }
 export interface SendMessageMutationArgs {
-  channelId: string | null; 
-  directTo: string | null; 
-  content: string; 
+  channelId: string | null;
+  directTo: string | null;
+  content: string;
 }
 export interface EditMessageMutationArgs {
-  id: MessageIdentifier; 
-  content: string; 
+  id: MessageIdentifier;
+  content: string;
 }
 export interface DeleteMessageMutationArgs {
-  id: MessageIdentifier; 
+  id: MessageIdentifier;
 }
 export interface AddReactionToMassageMutationArgs {
-  id: MessageIdentifier; 
-  icon: string; 
+  id: MessageIdentifier;
+  icon: string;
 }
 export interface SetStatusMutationArgs {
-  status: UserStatus; 
+  status: UserStatus;
 }
 export interface LoginWithPasswordMutationArgs {
-  user: UserInput; 
-  password: string; 
+  userInput: UserInput;
+  password: string;
 }
 export interface RefreshTokensMutationArgs {
-  accessToken: string; 
-  refreshToken: string; 
+  accessToken: string;
+  refreshToken: string;
 }
 export interface LogoutMutationArgs {
-  accessToken: string; 
+  accessToken: string;
 }
 export interface ImpersonateMutationArgs {
-  accessToken: string; 
-  username: string; 
+  accessToken: string;
+  username: string;
 }
 export interface CreateUserMutationArgs {
-  user: CreateUserInput; 
+  user: CreateUserInput;
 }
 export interface VerifyEmailMutationArgs {
-  token: string; 
+  token: string;
 }
 export interface ResetPasswordMutationArgs {
-  token: string; 
-  newPassword: PasswordInput; 
+  token: string;
+  newPassword: PasswordInput;
 }
 export interface SendVerificationEmailMutationArgs {
-  email: string; 
+  email: string;
 }
 export interface SendResetPasswordEmailMutationArgs {
-  email: string; 
+  email: string;
 }
 export interface ChatMessageAddedSubscriptionArgs {
-  channelId: string | null; 
-  directTo: string | null; 
+  channelId: string | null;
+  directTo: string | null;
 }
 
 export type Privacy = "PRIVATE" | "PUBLIC" | "ALL";
@@ -256,14 +256,14 @@ export namespace ChannelByName {
   }
 
   export type Query = {
-    channelByName: ChannelByName | null; 
+    channelByName: ChannelByName | null;
   }
 
   export type ChannelByName = {
-    id: string; 
-    name: string | null; 
-    direct: boolean | null; 
-    privateChannel: boolean | null; 
+    id: string;
+    name: string | null;
+    direct: boolean | null;
+    privateChannel: boolean | null;
   }
 }
 export namespace ChatMessageAdded {
@@ -273,7 +273,7 @@ export namespace ChatMessageAdded {
   }
 
   export type Subscription = {
-    chatMessageAdded: ChatMessageAdded | null; 
+    chatMessageAdded: ChatMessageAdded | null;
   }
 
   export type ChatMessageAdded = {
@@ -286,14 +286,14 @@ export namespace DirectChannel {
   }
 
   export type Query = {
-    directChannel: DirectChannel | null; 
+    directChannel: DirectChannel | null;
   }
 
   export type DirectChannel = {
-    id: string; 
-    name: string | null; 
-    direct: boolean | null; 
-    privateChannel: boolean | null; 
+    id: string;
+    name: string | null;
+    direct: boolean | null;
+    privateChannel: boolean | null;
   }
 }
 export namespace GetAllProviders {
@@ -301,11 +301,11 @@ export namespace GetAllProviders {
   }
 
   export type Query = {
-    oauthProviders: OauthProviders[] | null; 
+    oauthProviders: OauthProviders[] | null;
   }
 
   export type OauthProviders = {
-    name: string; 
+    name: string;
   }
 }
 export namespace Messages {
@@ -320,19 +320,19 @@ export namespace Messages {
   }
 
   export type Query = {
-    messages: Messages | null; 
+    messages: Messages | null;
   }
 
   export type Messages = {
-    cursor: string | null; 
-    channel: Channel | null; 
-    messagesArray: MessagesArray[] | null; 
+    cursor: string | null;
+    channel: Channel | null;
+    messagesArray: MessagesArray[] | null;
   }
 
   export type Channel = {
-    id: string; 
-    name: string | null; 
-    direct: boolean | null; 
+    id: string;
+    name: string | null;
+    direct: boolean | null;
   }
 
   export type MessagesArray = {
@@ -344,14 +344,14 @@ export namespace MyChannels {
   }
 
   export type Query = {
-    channelsByUser: ChannelsByUser[] | null; 
+    channelsByUser: ChannelsByUser[] | null;
   }
 
   export type ChannelsByUser = {
-    id: string; 
-    direct: boolean | null; 
-    name: string | null; 
-    privateChannel: boolean | null; 
+    id: string;
+    direct: boolean | null;
+    name: string | null;
+    privateChannel: boolean | null;
   }
 }
 export namespace SendMessage {
@@ -362,7 +362,7 @@ export namespace SendMessage {
   }
 
   export type Mutation = {
-    sendMessage: SendMessage | null; 
+    sendMessage: SendMessage | null;
   }
 
   export type SendMessage = {
@@ -371,12 +371,12 @@ export namespace SendMessage {
 
 export namespace MessageFragment {
   export type Fragment = {
-    id: string | null; 
-    author: Author | null; 
-    type: string | null; 
-    content: string | null; 
-    creationTime: number | null; 
-    fromServer: boolean | null; 
+    id: string | null;
+    author: Author | null;
+    type: string | null;
+    content: string | null;
+    creationTime: number | null;
+    fromServer: boolean | null;
   }
 
   export type Author = {
@@ -385,9 +385,9 @@ export namespace MessageFragment {
 
 export namespace UserFields {
   export type Fragment = {
-    id: string; 
-    name: string | null; 
-    avatar: string | null; 
-    username: string | null; 
+    id: string;
+    name: string | null;
+    avatar: string | null;
+    username: string | null;
   }
 }
